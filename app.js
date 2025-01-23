@@ -3,6 +3,7 @@ const session = require('express-session'); // Import express-session
 const app = express();
 const dotenv = require('dotenv');
 dotenv.config();
+const cookieParser = require('cookie-parser')
 const ConnectDB = require('./config/db');
 ConnectDB();
 const PORT = process.env.PORT || 3000;

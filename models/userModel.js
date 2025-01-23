@@ -41,12 +41,12 @@ userSchema.pre('save', async function(){
      this.password = await bcrypt.hash(this.password,10);
 })
 
-userSchema.pre('compare',async function(painText,Userpassword){
-    return await bcrypt.compare(painText,Userpassword)
-   
-})
+userSchema.methods.comparePassword = async function (plainText) {
+    return await bcrypt.compare(plainText, this.password);
+};
+
 userSchema.methods.generateToken = function(){
-    return JWT.sign({_id:this._id},'SECRETE',{expiresIn:"7d"})
+    return JWT.sign({_id:this._id},'abc',{expiresIn:"7d"})
 }
 const UserSchema = mongoose.model('User',userSchema);
 module.exports = UserSchema;

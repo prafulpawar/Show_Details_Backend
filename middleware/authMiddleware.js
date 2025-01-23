@@ -1,9 +1,10 @@
 const JWT = require('jsonwebtoken');
 const userModel = require('../models/userModel');
 
-module.exports.isAuth = async (req, res) => {
+module.exports.isAuth = async (req, res,next) => {
     try {
         const { token } = req.cookies;
+        console.log(token)
         if (!token) {
             return res.status(401).send({
                 message: 'Not authorized',
@@ -12,8 +13,9 @@ module.exports.isAuth = async (req, res) => {
                 success: false,
             })
         }
-        const ExistsUser = JWT.verify(token, 'secret');
+        const ExistsUser = JWT.verify(token, 'abc');
         req.user = await userModel.findById(ExistsUser)
+        console.log(req.user)
         if (!req.user) {
             return res.status(404).json({
                 message: 'User not found',
@@ -26,6 +28,7 @@ module.exports.isAuth = async (req, res) => {
 
     }
     catch (error) {
+         console.log(error)
         return res.status(401).send({
             message: 'Invalid or expired token',
             status: 'failed',
