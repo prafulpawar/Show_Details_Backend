@@ -1,12 +1,26 @@
 const express  = require('express');
 const router   = express.Router();
-const { createUser, verifyOtp, login, fogatepassword, verifyOtpReset } = require('../controllers/userController'); // Add verifyOtp to import
+const {createUserIndex,loginPageIndex, createUser,forgatepasswordIndex, verifyOtp, login, fogatepassword, verifyOtpReset,nowForgate,otpPage } = require('../controllers/userController'); // Add verifyOtp to import
 const {isAuth} = require('../middleware/authMiddleware')
 const upload        = require('../multer/multer');
 
-router.post('/createUser', upload.single('image'), createUser);
-router.post('/verifyOtp', verifyOtp);  // Add verify OTP route
+// UserCreation
+router.get('/',createUserIndex)
+router.post('/createUser', upload.single('profilePic'), createUser);
+router.post('/verifyOtp', verifyOtp);  
+
+
+router.get('/loginPage',loginPageIndex)
 router.post('/login',login)
-router.post('/resetepass',isAuth,fogatepassword)
-router.post('/verifyotp',verifyOtpReset)
+
+
+router.get('/otp',otpPage)
+
+router.get('/forgot-password',forgatepasswordIndex)
+router.post('/forgot-password',fogatepassword)
+
+
+router.post('/verifyotps',isAuth,verifyOtpReset)
+
+router.post('/nowforgate',isAuth,nowForgate)
 module.exports = router;

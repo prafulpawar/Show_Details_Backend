@@ -4,7 +4,6 @@ const userModel = require('../models/userModel');
 module.exports.isAuth = async (req, res,next) => {
     try {
         const { token } = req.cookies;
-        console.log(token)
         if (!token) {
             return res.status(401).send({
                 message: 'Not authorized',
@@ -15,7 +14,6 @@ module.exports.isAuth = async (req, res,next) => {
         }
         const ExistsUser = JWT.verify(token, 'abc');
         req.user = await userModel.findById(ExistsUser)
-        console.log(req.user)
         if (!req.user) {
             return res.status(404).json({
                 message: 'User not found',
