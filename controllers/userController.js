@@ -190,7 +190,7 @@ module.exports.fogatepassword = async (req, res) => {
     req.session.otpTime = Date.now(); // Store time of OTP generation (optional, for expiry)
 
     return res.status(200).send({
-      message: 'Error',
+      message: 'Otp Sent',
       success: true
     })
   } catch (error) {
