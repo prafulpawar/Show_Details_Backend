@@ -51,4 +51,3 @@ userSchema.methods.generateToken = function(){
 }
 const UserSchema = mongoose.model('User',userSchema);
 module.exports = UserSchema;
-

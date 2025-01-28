@@ -163,8 +163,8 @@ module.exports.login = async (req, res) => {
       success: true,
       token: token
     })
-
   }
+
   catch {
 
   }
